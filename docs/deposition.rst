@@ -9,6 +9,7 @@ Quick Start
 
 .. code-block:: py
 
+    import os
     import urllib
     from zenodio.deposition import Deposition
     
@@ -36,6 +37,9 @@ Quick Start
     d.append_file(book_path)
     d.metadata = book_metadata
     d.publish()
+
+    # Remove the PDF we downloaded
+    os.remove(book_path)
 
 API Reference
 =============
