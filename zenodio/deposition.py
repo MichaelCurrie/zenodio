@@ -22,8 +22,7 @@ def checksum_md5(file_path):
         for chunk in iter(lambda: f.read(128 * md5.block_size), b''):
             md5.update(chunk)
 
-    # Match the format used by Zenodo's checksum
-    return 'md5:%s' % md5.hexdigest()
+    return md5.hexdigest()
 
 
 class Deposition():
@@ -171,20 +170,20 @@ class Deposition():
 
         data = {'filename': os.path.basename(file_path)}
         files = {'file': open(file_path, 'rb')}
-        r = requests.post(
+        req = requests.post(
             (self._deposit_url + '/' + str(self.deposition_id) + '/files' +
              self._token_str),
             data=data, files=files)
-        if r.status_code != 201:
+        if req.status_code != 201:
             raise Exception("Error uploading resource %s: %s" %
-                            (file_path, r.json()))
+                            (file_path, req.json()))
 
         # Every time we upload a file, the files list should expand
-        self.files.append(r.json())
+        self.files.append(req.json())
 
         # Validate the integrity of the uploaded file via its checksum
         local_md5 = checksum_md5(file_path)
-        remote_md5 = r.json()['checksum']
+        remote_md5 = req.json()['checksum']
         if local_md5 != remote_md5:
             raise Exception(
                 "Error uploading file: Checksums do not match. "
