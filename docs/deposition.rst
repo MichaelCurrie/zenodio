@@ -21,7 +21,10 @@ Quick Start
         "title": "An Inquiry into the Nature and Causes of the Wealth of Nations",
         "upload_type": "publication",
         "publication_type": "book",
-        "publication_date": "1776-03-09",
+    # Note: due to a Zenodo bug we cannot use a date prior to 1900, so we cannot
+    # use the correct publication data of 1776-03-09.
+    # (See https://github.com/zenodo/zenodo/issues/1079)
+        "publication_date": "1976-03-09",
         "description": "A description of what builds nations' wealth.",
         "creators": [{"name": "Smith, Adam",
                       "affiliation": "University of Glasgow"}]
