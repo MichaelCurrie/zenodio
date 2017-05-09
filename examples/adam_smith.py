@@ -1,5 +1,12 @@
+import sys
 import os
 import urllib
+
+# We must add .. to the path so that we can perform the
+# import of open-worm-analysis-toolbox while running this as
+# a top-level script (i.e. with __name__ = '__main__')
+sys.path.append('..')
+
 from zenodio.deposition import Deposition
 
 ACCESS_TOKEN  = 'n2vW3bQz2mVHzGL3KiSrVZzqtAv8Wv3kGE3fOdfkXTlxFserY47r9TASG1Hx'
